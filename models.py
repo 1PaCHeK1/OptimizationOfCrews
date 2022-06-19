@@ -43,12 +43,14 @@ class Brigade:
     performance: int
     cost: int
     status: BrigadeStatusEnum
+    hours: int
 
-    def __init__(self, uid, cost, performance, status=BrigadeStatusEnum.FREE) -> None:
+    def __init__(self, uid, cost, performance, hours=12, status=BrigadeStatusEnum.FREE) -> None:
         self.uid = uid
         self.cost = cost
         self.performance = performance
         self.status = status
+        self.hours = hours
 
     def __str__(self) -> str:
         return str(self.uid)

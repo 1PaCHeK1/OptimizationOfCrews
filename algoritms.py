@@ -2,8 +2,8 @@ import itertools
 import numpy as np
 from numpy import random
 from scipy.optimize import linear_sum_assignment
- 
- 
+
+
 # Назначение задачи
 class TaskAssignment:
  
@@ -12,7 +12,7 @@ class TaskAssignment:
         self.matrix = np.array([np.array([0]*len(deliverys)) for i in range(len(brigades))])
         for i, brigade in enumerate(brigades):
             for j, delivery in enumerate(deliverys):
-                self.matrix[i][j] = delivery.volume / brigade.performance
+                self.matrix[i][j] = delivery.volume / brigade.performance * brigade.cost 
 
         self.mode = mode
         if mode == 'all_permutation':
