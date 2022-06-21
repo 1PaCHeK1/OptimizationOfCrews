@@ -5,10 +5,9 @@ import pandas as pd
 
 class DeliveryStatusEnum(Enum):
     UNLOADING   = 1  # разгрузка
-    SORTING     = 2  # сортировка
-    STORAGE     = 3  # хранение
-    PRELOADING  = 4  # подготовка к отправке
-    LOADING     = 5  # загрузка
+    # STORAGE     = 2  # хранение
+    LOADING     = 2  # загрузка
+    SENDED      = 3
 
 
 class Delivery:
@@ -54,6 +53,25 @@ class Brigade:
 
     def __str__(self) -> str:
         return str(self.uid)
+
+
+class Point:
+    date: datetime
+    cost: float
+    deliverys: Delivery
+    brigades: Brigade
+    
+    def __init__(self, date, cost, brigades, deliverys, solution) -> None:
+        self.date = date
+        self.cost = cost
+        # self.__solution = solution 
+        # self.__brigades = brigades
+        # self.__deliverys = deliverys
+
+        self.solution = {deliverys[delivery].uid:brigade  for delivery, brigade in enumerate(solution) }
+    
+    def __str__(self) -> str:
+        return str(self.date)
 
 
 def load_delivery_data(data:pd.DataFrame) -> list[Delivery]:

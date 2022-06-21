@@ -54,9 +54,9 @@ class ga(GA):
         for brigade, deliverys in result.items():
             brigade = self.brigades[brigade]
             duration = sum([self.deliverys[d].volume/brigade.performance for d in deliverys])
-            duration += 2*(duration//brigade.hours)
+            if duration > brigade.hours:  return math.inf
             # print('duration', brigade.uid, duration, (1 + duration//brigade.hours))
-            answer += brigade.cost*(1 + duration//brigade.hours)
+            answer += brigade.cost #*(1 + duration//brigade.hours)
         # print('answer', answer)
         return answer
 
@@ -70,4 +70,4 @@ class ga(GA):
     def filter(self) -> None:
         # self.population.sort(key=lambda gen: gen.func)
         self.population = self.population[len(self.population)//3:]
-        print(self.population[-1])
+        # print(self.population[-1])

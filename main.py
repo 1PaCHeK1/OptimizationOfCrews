@@ -2,13 +2,17 @@ import pandas as pd
 from ga import ga
 import models
 from models import Delivery, Brigade
-from algoritms import TaskAssignment
+from algoritms import ScheduleBuilder
 
 
 delivery_data = models.load_delivery_data(pd.read_excel('supply_information.xlsx'))
 brigade_data = models.load_brigade_data(pd.read_excel('brigade.xlsx'))
 
-solution = ga(brigade_data, delivery_data, 120, maxage=3, maxiter=25).fitness()
+
+
+solution = ScheduleBuilder(brigade_data, delivery_data).solve()
 
 print()
-print(solution)
+print("Дата события |  Стоимость  | Распределение {Погрузка:Бригада}")
+[print(f"{str(point.date)[:-9]:^12} | {point.cost:^11} | {point.solution}") for point in solution]
+print()
